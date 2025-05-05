@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nic at nite</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            opacity: 0.8;
+            margin-bottom: 30px;
+        }
+
+        .order-btn, .checkout-btn {
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            padding: 15px 50px;
+            font-size: 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(255, 0, 0, 0.3);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+        }
+
+        .order-btn:hover, .checkout-btn:hover {
+            background-color: #cc0000;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(255, 0, 0, 0.4);
+        }
+
+        .order-btn:active, .checkout-btn:active {
+            transform: translateY(1px);
+        }
+
+        .order-form {
+            display: none;
+            background-color: #1a1a1a;
+            padding: 30px;
+            border-radius: 10px;
+            width: 350px;
+            max-width: 90%;
+            text-align: center;
+        }
+
+        .order-form h2 {
+            margin-top: 0;
+            color: #ff0000;
+        }
+
+        .pizza-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .pizza-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .pizza-price {
+            color: #ff0000;
+            font-weight: bold;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .quantity-selector button {
+            background-color: #333;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .quantity-selector input {
+            width: 50px;
+            text-align: center;
+            margin: 0 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 5px;
+            font-size: 1.2rem;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>RAY'S PIZZA</h1>
+        <div class="tagline">Authentic Italian Flavor, Delivered Hot</div>
+    </div>
+    
+    <button class="order-btn" id="orderBtn">Order Now</button>
+
+    <div class="order-form" id="orderForm">
+        <button class="close-btn" id="closeBtn">&times;</button>
+        <h2>Order Margherita Pizza</h2>
+        
+        <div class="pizza-option">
+            <span class="pizza-name">Margherita Pizza</span>
+            <span class="pizza-price">$20.00</span>
+        </div>
+        
+        <div class="quantity-selector">
+            <button id="decreaseQty">-</button>
+            <input type="number" id="quantity" value="1" min="1">
+            <button id="increaseQty">+</button>
+        </div>
+        
+        <button class="checkout-btn" id="checkoutBtn">Proceed to Checkout</button>
+    </div>
+
+    <script>
+        const orderBtn = document.getElementById('orderBtn');
+        const orderForm = document.getElementById('orderForm');
+        const closeBtn = document.getElementById('closeBtn');
+        const decreaseQty = document.getElementById('decreaseQty');
+        const increaseQty = document.getElementById('increaseQty');
+        const quantityInput = document.getElementById('quantity');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+
+        // Toggle order form visibility
+        orderBtn.addEventListener('click', () => {
+            orderForm.style.display = 'block';
+        });
+
+        closeBtn.addEventListener('click', () => {
+            orderForm.style.display = 'none';
+        });
+
+        // Quantity controls
+        decreaseQty.addEventListener('click', () => {
+            let qty = parseInt(quantityInput.value);
+            if (qty > 1) {
+                quantityInput.value = qty - 1;
+            }
+        });
+
+        increaseQty.addEventListener('click', () => {
+            let qty = parseInt(quantityInput.value);
+            quantityInput.value = qty + 1;
+        });
+
+        // Stripe checkout - replace with your actual Stripe checkout link
+        checkoutBtn.addEventListener('click', () => {
+            const quantity = quantityInput.value;
+            // This would be your actual Stripe checkout link with the proper parameters
+            const stripeCheckoutLink = 'https://buy.stripe.com/14k6p4bCc71q4Mw145'
+            window.location.href = stripeCheckoutLink;
+        });
+    </script>
+</body>
+</html>
