@@ -196,7 +196,7 @@
         checkoutBtn.addEventListener('click', () => {
             const quantity = quantityInput.value;
             // This would be your actual Stripe checkout link with the proper parameters
-            const stripeCheckoutLink = 'https://buy.stripe.com/14k6p4bCc71q4Mw145'
+            const stripeCheckoutLink = `https://buy.stripe.com/prod_S8rNzZIT9UgcZ?quantity=${quantity}`;
             window.location.href = stripeCheckoutLink;
         });
     </script>
